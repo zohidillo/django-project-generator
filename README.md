@@ -94,10 +94,10 @@ project_name
 
 ## 🛠 Hissa qo‘shish
 
-Hissa qo‘shmoqchi bo‘lsangiz:
+Hissa qo‘shmoqchi bo‘lsangiz ([Github]):
 
-1. Fork qiling.
-2. O‘zingizning branch-ni yarating (`feature/new-feature`).
+1. **Fork qiling** – [GitHub repo](https://github.com/zohidillo/django-project-generator) sahifasiga kiring va `Fork` tugmasini bosing.
+2. O‘zingizning branch-ni qo'shing (`feature/new-feature`).
 3. O‘zgarishlaringizni push qiling.
 4. Pull request yuboring.
 
