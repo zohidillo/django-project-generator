@@ -24,3 +24,7 @@ dist/
 
 # MacOS va Linux tizimlaridagi keraksiz fayllar
 .DS_Store
+
+*.egg-info
+new
+
