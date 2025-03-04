@@ -1,0 +1,26 @@
+# Python loyihasi uchun
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+env/
+*.env
+
+# Build va distribyutsiya fayllari
+build/
+dist/
+*.egg-info/
+
+# IDE va tahrirlagichlar uchun
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# PyPI build uchun
+*.tar.gz
+*.whl
+
+# MacOS va Linux tizimlaridagi keraksiz fayllar
+.DS_Store
