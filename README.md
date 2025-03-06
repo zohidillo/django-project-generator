@@ -9,7 +9,7 @@ tanloviga qarab kerakli kutubxonalarni avtomatik o‘rnatadi.
 ## ⚙️ O‘rnatish
 
 ```bash
-pip install django-generator
+pip install django-gen
 ```
 
 ---
