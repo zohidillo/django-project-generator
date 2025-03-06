@@ -1,7 +1,7 @@
 BASE_SETTINGS = f"""import os
 import environ
 from datetime import timedelta
-from new.config.settings.base import *
+from config.settings.base import *
 
 # env settings
 env = environ.Env()
@@ -119,6 +119,14 @@ DATABASES = {
         "OPTIONS": {
             "charset": "utf8mb4",
         },
+    }
+}
+"""
+
+SQLite = """DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 """

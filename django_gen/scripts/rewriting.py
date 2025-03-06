@@ -41,7 +41,7 @@ def rewrite_urls(use_drf=False, use_jwt=False, use_debug_toolbar=False):
         "",
         "urlpatterns = [",
         "    path('admin/', admin.site.urls),",
-        "    path('', include('src.api.include_routers')),",
+        "    #path('', include('src.api.include_routers')),",
     ]
 
     if use_drf:

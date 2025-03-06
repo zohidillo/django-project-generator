@@ -1,4 +1,5 @@
 import os
+import sys
 import shutil
 
 from rich.panel import Panel
@@ -27,7 +28,8 @@ def project_generator(**kwargs):
             os.system(f"cd {project_name} && django-admin startproject config .")  # make project
             progress.update(task, advance=1)
 
-            os.system(f"cd {project_name}/ && mkdir src && cd src/ && python ../manage.py startapp core")
+            python_cmd = sys.executable
+            os.system(f"cd {project_name}/ && mkdir src && cd src/ && {python_cmd} ../manage.py startapp core")
             progress.update(task, advance=1)
 
             if kwargs.get("use_templates"):

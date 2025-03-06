@@ -5,14 +5,15 @@ from .rewriting import rewrite_middleware
 def write_deployment(project_name, **kwargs):
     requirements = """Django\ndjango-environ"""
     setup_cfg = ""
+    database = kwargs.get("database")
     use_drf = kwargs.get("use_drf", False)
     use_jwt = kwargs.get("use_jwt", False)
+    use_black = kwargs.get("use_black", False)
     use_docker = kwargs.get("use_docker", False)
+    use_flake8 = kwargs.get("use_flake8", False)
+    use_templates = kwargs.get("use_templates", False)
     use_whitenoise = kwargs.get("use_whitenoise", False)
     use_debug_toolbar = kwargs.get("use_debug_toolbar", False)
-    use_black = kwargs.get("use_black", False)
-    use_flake8 = kwargs.get("use_flake8", False)
-    database = kwargs.get("database")
 
     apps = []
     if use_drf:
@@ -33,12 +34,17 @@ INSTALLED_APPS += LOCAL_APPS + EXTERNAL_APPS
     settings = templates.BASE_SETTINGS + app_section
     settings = rewrite_middleware(use_whitenoise, use_drf, use_debug_toolbar, settings)
 
+    if use_templates:
+        settings += """\n\nTEMPLATES[0]["DIRS"].append(os.path.join(BASE_DIR, "templates"))"""
+
     if database == "PostgreSQL":
         settings += templates.POSTGRE_SQL
         requirements += "\npsycopg2"
     if database == "MySQL":
         settings += templates.MY_SQL
         requirements += "\nmysqlclient"
+    if database == "SQLite" and use_docker is False:
+        settings += templates.SQLite
     if database == "SQLite" and use_docker:
         settings += templates.POSTGRE_SQL
         requirements += "\npsycopg2"
