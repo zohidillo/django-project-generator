@@ -16,11 +16,7 @@ def project_generator(**kwargs):
 
     try:
         with Progress() as progress:
-            task = progress.add_task("[cyan]🔨 Loyiha tayyorlanmoqda...", total=9)
-
-            if os.path.exists(project_name):
-                shutil.rmtree(project_name, ignore_errors=True)
-            progress.update(task, advance=1)
+            task = progress.add_task("[cyan]🔨 Loyiha tayyorlanmoqda...", total=8)
 
             os.makedirs(project_name, exist_ok=True)  # add project folder
             progress.update(task, advance=1)

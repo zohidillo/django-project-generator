@@ -1,4 +1,6 @@
+import os
 import click
+import shutil
 from rich.prompt import Confirm
 from rich.console import Console
 from django_gen.generator import project_generator
@@ -8,6 +10,13 @@ from django_gen.generator import project_generator
 @click.argument("project_name")
 def main(project_name):
     console = Console()
+
+    if os.path.exists(project_name):
+        console.print(f"[bold yellow]⚠️ '{project_name}' papkasi allaqachon mavjud![/]")
+
+        if Confirm.ask(f"[bold]Uni o‘chirib yangisini yaratishni xohlaysizmi?[/]"):
+            shutil.rmtree(project_name)
+            console.print(f"[bold green]✅ '{project_name}' papkasi o‘chirildi!")
 
     console.print(f"\n[bold cyan]🎯 \"{str(project_name).upper()}\" loyihasini yaratamiz...[/]\n")
 
