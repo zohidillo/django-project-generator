@@ -3,7 +3,7 @@ from .rewriting import rewrite_middleware
 
 
 def write_deployment(project_name, **kwargs):
-    requirements = """Django"""
+    requirements = """Django\ndjango-environ"""
     setup_cfg = ""
     use_drf = kwargs.get("use_drf", False)
     use_jwt = kwargs.get("use_jwt", False)

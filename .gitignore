@@ -26,5 +26,6 @@ dist/
 .DS_Store
 
 *.egg-info
-new
+new/*
+
 

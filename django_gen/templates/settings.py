@@ -164,7 +164,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "asserts")
+STATIC_ROOT = os.path.join(BASE_DIR, "assets")
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
@@ -174,7 +174,7 @@ WHITENOISE = """
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 """
 
-MANAGE_PY='''#!/usr/bin/env python
+MANAGE_PY = '''#!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
@@ -182,7 +182,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.deployment")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

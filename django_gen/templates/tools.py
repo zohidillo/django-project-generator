@@ -26,14 +26,15 @@ admin.site.index_title = "Admin panel"
 
 ENV_EXAMPLE = """DEBUG=1
 SECRET_KEY=django_secret_key
-ALLOWED_HOST=127.0.0.1,localhost,0.0.0.0
+ALLOWED_HOSTS=127.0.0.1,localhost,0.0.0.0
+"""
 
+DB_ENV_EXAMPLE = """
 DB_PASS=123
 DB_PORT=5432
 DB_USER=server
 DB_NAME=db_name
-DB_HOST=localhost
-"""
+DB_HOST=localhost"""
 
 GITIGNORE = """venv
 .idea

@@ -3,22 +3,26 @@ import django_gen.templates as templates
 
 def rewrite_middleware(use_whitenoise, use_drf, use_debug_toolbar, settings):
     middleware_list = [
-        "django.middleware.security.SecurityMiddleware",
-        "django.middleware.common.CommonMiddleware",
-        "django.middleware.csrf.CsrfViewMiddleware",
-        "django.contrib.auth.middleware.AuthenticationMiddleware",
-        "django.contrib.messages.middleware.MessageMiddleware",
-        "django.middleware.clickjacking.XFrameOptionsMiddleware",
+        'django.middleware.security.SecurityMiddleware',
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.locale.LocaleMiddleware',
+        'django.middleware.common.CommonMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        'django.middleware.clickjacking.XFrameOptionsMiddleware',
     ]
 
     if use_whitenoise:
-        middleware_list.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
+        i = middleware_list.index('django.middleware.security.SecurityMiddleware')
+        middleware_list.insert(i + 1, "whitenoise.middleware.WhiteNoiseMiddleware")
 
     if use_drf:
-        middleware_list.insert(2, "corsheaders.middleware.CorsMiddleware")
+        middleware_list.insert(0, "corsheaders.middleware.CorsMiddleware")
 
     if use_debug_toolbar:
-        middleware_list.append("debug_toolbar.middleware.DebugToolbarMiddleware")
+        i = middleware_list.index('django.contrib.sessions.middleware.SessionMiddleware')
+        middleware_list.insert(i + 1, "debug_toolbar.middleware.DebugToolbarMiddleware")
 
     settings += "MIDDLEWARE = [\n    " + ",\n    ".join(f'"{mw}"' for mw in middleware_list) + "\n]"
     return settings
@@ -103,6 +107,8 @@ def rewrite_files(project_name, **kwargs):
 
     env = templates.ENV_EXAMPLE
     env += "\nDOCKER=1" if use_docker else ""
+    if kwargs.get("database") != "SQLite":
+        env += templates.DB_ENV_EXAMPLE
 
     with open(f"{project_name}/.env.dev", "w") as file:
         file.write(env)
